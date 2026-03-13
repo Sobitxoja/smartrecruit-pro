@@ -51,7 +51,7 @@ app.post("/api/verify/send", async (req, res) => {
   if (resend) {
     try {
       await resend.emails.send({
-        from: "onboarding@resend.dev",
+        from: "sobit.ortiqxojaev@gmail.com",
         to: email,
         subject: "Verification Code: " + code,
         html: `
