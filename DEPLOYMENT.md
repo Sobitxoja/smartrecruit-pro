@@ -10,10 +10,12 @@
 
 ## 🚀 Deployment Steps
 
-### Step 1: Install Vercel CLI (Optional but recommended)
+### Step 1: Push to GitHub
 
 ```bash
-npm install -g vercel
+git add .
+git commit -m "Prepare for Vercel deployment"
+git push
 ```
 
 ### Step 2: Deploy to Vercel
@@ -28,19 +30,17 @@ npm install -g vercel
 **Option B: Using Vercel CLI**
 
 ```bash
+# Install Vercel CLI globally
+npm install -g vercel
+
 # Login to Vercel
 vercel login
 
-# Deploy
+# Deploy to preview
 vercel
 
-# Follow the prompts:
-# - Set up and deploy? Y
-# - Which scope? (select your account)
-# - Link to existing project? N
-# - Project name? smartrecruit-pro
-# - Directory? ./
-# - Override settings? N
+# Deploy to production
+vercel --prod
 ```
 
 ### Step 3: Add Environment Variables in Vercel
@@ -63,7 +63,7 @@ Go to your project settings in Vercel Dashboard → **Environment Variables** �
 ### Email Verification Limitation
 
 Your current Resend account is in **test mode**. It will only send emails to:
-- `sobit.ortiqxojaev@gmail.com`
+- ✅ `sobit.ortiqxojaev@gmail.com`
 
 **To send to any email:**
 
@@ -105,7 +105,7 @@ npm run dev
 # Build for production
 npm run build
 
-# Preview production build
+# Preview production build locally
 npm run preview
 ```
 
@@ -136,7 +136,28 @@ Your app will be available at:
 
 ---
 
-## 📦 Quick Deploy Command
+## 📦 Project Structure
+
+```
+smartrecruit-pro/
+├── api/                    # Vercel serverless functions
+│   └── verify/
+│       ├── send.ts        # POST /api/verify/send
+│       ├── check.ts       # POST /api/verify/check
+│       └── status.ts      # GET /api/verify/status
+├── dist/                   # Production build output
+├── index.html
+├── index.tsx
+├── App.tsx
+├── server.ts              # Express server (local dev)
+├── vite.config.ts
+├── tailwind.config.js
+└── vercel.json
+```
+
+---
+
+## 🎯 Quick Deploy Command
 
 ```bash
 vercel --prod

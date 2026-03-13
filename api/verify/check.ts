@@ -1,4 +1,4 @@
-import { VercelRequest, VercelResponse } from '@vercel/node';
+import type { VercelRequest, VercelResponse } from '@vercel/node';
 
 // In-memory store for verification codes (Email -> {code, timestamp})
 const verificationCodes = new Map<string, { code: string; timestamp: number }>();
