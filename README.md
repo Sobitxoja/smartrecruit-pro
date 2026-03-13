@@ -99,8 +99,12 @@ If you want to run the project on your own computer:
    Create a `.env` file in the root directory and add:
    ```env
    VITE_SUPABASE_URL=your_supabase_url
-   VITE_SUPABASE_ANON_KEY=your_supabase_anon_key
-   ```
+   VITE_SUPABASE_ANON_KEY=your_supabase_anon_key   # Optional: provide email delivery via Resend
+   # - RESEND_API_KEY is used by the backend server
+   # - VITE_RESEND_API_KEY (same value) lets the frontend detect whether real
+   #   emails are enabled for the tour/notification UI
+   RESEND_API_KEY=your_resend_api_key
+   VITE_RESEND_API_KEY=your_resend_api_key   ```
 
 3. **Start the Development Server**:
    ```bash

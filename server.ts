@@ -18,7 +18,8 @@ const verificationCodes = new Map<string, { code: string; timestamp: number }>()
 let resendClient: Resend | null = null;
 const getResend = () => {
   if (!resendClient) {
-    const apiKey = process.env.RESEND_API_KEY;
+    // support either plain RESEND_API_KEY (server) or VITE_RESEND_API_KEY (shared env for dev)
+    const apiKey = process.env.RESEND_API_KEY || process.env.VITE_RESEND_API_KEY;
     if (!apiKey) {
       console.warn("RESEND_API_KEY is not set. Emails will be simulated.");
       return null;
@@ -29,11 +30,14 @@ const getResend = () => {
 };
 
 // API Routes
+// API Routes
 app.get("/api/verify/status", (req, res) => {
-  res.json({ 
-    configured: !!process.env.RESEND_API_KEY,
-    mode: process.env.RESEND_API_KEY ? "production" : "simulation"
-  });
+    // Check whichever key is available (server or VITE prefixed)
+    const hasValidKey = !!(process.env.RESEND_API_KEY || process.env.VITE_RESEND_API_KEY);
+    res.json({
+        configured: hasValidKey,
+        mode: hasValidKey ? "production" : "simulation"
+    });
 });
 
 app.post("/api/verify/send", async (req, res) => {
